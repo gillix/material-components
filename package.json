@@ -1,6 +1,6 @@
 {
   "name": "material-components",
-  "version": "0.3.16",
+  "version": "0.3.17",
   "description": "A material design framework/component library for Svelte, with full support for light and dark themes and customisability.",
   "license": "MIT",
   "author": "Karas",
@@ -39,6 +39,7 @@
     "svelte": ">=3.29.4"
   },
   "devDependencies": {
+    "@imask/svelte": "*",
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
     "@rollup/plugin-commonjs": "^17.1.0",

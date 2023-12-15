@@ -17,7 +17,7 @@
 </style>
 
 <div
-  class="s-input {klass}"
+  class="{klass} s-input"
   class:dense
   class:error
   class:success

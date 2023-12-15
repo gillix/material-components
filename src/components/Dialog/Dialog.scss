@@ -17,15 +17,17 @@
 
 .s-dialog__content {
   background-color: var(--theme-surface);
-  overflow: hidden;
+  //overflow: hidden;
   border-radius: 0;
   pointer-events: auto;
   z-index: inherit;
   @include elevation($dialog-elevation);
-  height: 100%;
   width: 100%;
   margin: 0;
 
+  &.fixed-height {
+    height: 100%;
+  }
 
   &.fullscreen {
     position: fixed;
@@ -65,11 +67,16 @@
 
     &:not(.fullscreen) {
       border-radius: $dialog-border-radius;
-      height: $dialog-height;
       width: $dialog-width;
-      max-height: var(--s-dialog-height);
       max-width: var(--s-dialog-width);
       margin: $dialog-margin;
+      max-height: $dialog-height;
+      //overflow: hidden;
+
+      &.fixed-height {
+        height: $dialog-height;
+        max-height: var(--s-dialog-height);
+      }
     }
   }
 }

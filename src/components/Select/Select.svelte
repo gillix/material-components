@@ -16,7 +16,7 @@
   export let active = false;
 
   export let options = {};
-  let items = options.items ?? [];
+  export let items = options.items ?? [];
   export let value = options.value ?? (multiple ? [] : null);
 
   export let filled = false;
@@ -34,14 +34,15 @@
   export let closeOnClick = !multiple;
   export let emptyString = '';
 
-  let required = options.required ?? false;
+  export let required = options.required ?? false;
 
-  const getSelectString = (v) => {
-    // We could also use `return items[0].value ? find.. : v` or provide a `basic` prop
-    const item = items.find((i) => i.value === v);
-    return item ? (item.name ? item.name : item) : (v || emptyString);
-  };
-  export let format = (val) => (Array.isArray(val) ? val.map((v) => getSelectString(v)).join(', ') : getSelectString(val));
+  let format = (val) => (Array.isArray(val) ? val.join(', ') : val);
+  let fetch = (val) => (Array.isArray(val) ? val.map((val) => names[val]) : names[val]);
+  let fetchIcon = (val) => items.find((item) => item.value === val)?.icon
+  let names = {};
+  for(let i = 0; i < items.length; i++) {
+    names[items[i].value] = items[i].name;
+  }
 
   const dispatch = createEventDispatcher();
   $: dispatch('change', value);
@@ -51,7 +52,7 @@
 </style>
 
 <div class="s-select {klass}" class:disabled class:chips>
-  <Menu offsetY={true} nudgeY={-20} tile={!outlined} bind:active {disabled} {closeOnClick}>
+  <Menu offsetY={true} nudgeY={-5} tile={!outlined} bind:active {disabled} {closeOnClick}>
     <span slot="activator">
       <TextField
         {filled}
@@ -60,18 +61,26 @@
         {dense}
         {color}
         {disabled}
-        value={items && format(value)}
+        {required}
+        value={format(fetch(value))}
         {placeholder}
         {hint}
+        {active}
         readonly>
         <slot slot="prepend-outer" name="prepend-outer" />
 
         <slot />
+        <div slot="prepend">
+          {#if value && !Array.isArray(value) && fetchIcon(value)}
+            <Icon path={fetchIcon(value)} />
+          {/if}
+        </div>
         <div slot="content">
+
           {#if chips && value}
             <span class="s-select__chips">
-              {#each Array.isArray(value) ? value.map((v) => getSelectString(v)) : [getSelectString(value)] as val}
-                <Chip>{val}</Chip>
+              {#each Array.isArray(value) ? value : [value] as v}
+                <Chip>{fetch(v)}</Chip>
               {/each}
             </span>
           {/if}
@@ -94,6 +103,8 @@
             <span slot="prepend">
               {#if multiple}
                 <Checkbox checked={value.includes(item.value ? item.value : item)} />
+              {:else if (item.icon)}
+                <Icon path={item.icon} />
               {/if}
             </span>
             {item.name ? item.name : item}

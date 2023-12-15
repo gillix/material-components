@@ -8,7 +8,7 @@
   align-items: center;
   color: inherit;
   display: flex;
-  margin-bottom: $input-slot-margin-bottom;
+  //margin-bottom: $input-slot-margin-bottom;
   position: relative;
   transition: $primary-transition;
   width: 100%;
@@ -26,8 +26,9 @@
   display: flex;
   flex: 1 0 auto;
   max-width: 100%;
-  font-size: 12px;
+  font-size: .75rem;
   overflow: hidden;
+  min-height: $input-slot-margin-bottom;
 
   & > [slot='messages'] {
     display: flex;
@@ -49,6 +50,17 @@
 
   input {
     max-height: $input-max-height;
+  }
+
+  .dense {
+    input {
+      max-height: $input-dense-max-height;
+    }
+
+    .s-input__details {
+      min-height: $input-slot-margin-bottom;
+    }
+
   }
 
   input,
@@ -131,9 +143,9 @@
     }
   }
 
-  &.dense {
-    .s-input__slot {
-      margin-bottom: $input-dense-slot-margin-bottom;
-    }
-  }
+  //&.dense {
+  //  .s-input__slot {
+  //    margin-bottom: $input-dense-slot-margin-bottom;
+  //  }
+  //}
 }

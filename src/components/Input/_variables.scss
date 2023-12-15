@@ -1,9 +1,10 @@
 @import '../../styles/variables';
 
-$input-font-size: 16px !default;
+$input-font-size: 1rem !default;
 $input-letter-spacing: normal !default;
 $input-text-align: left !default;
-$input-max-height: 32px !default;
+$input-max-height: 56px !default;
+$input-dense-max-height: 32px !default;
 $input-label-height: 20px !default;
 $input-label-letter-spacing: 20px !default;
 $input-prepend-append-outer-margin: 9px !default;

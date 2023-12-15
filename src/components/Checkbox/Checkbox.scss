@@ -57,6 +57,10 @@
     &:hover::before {
       opacity: 0.16;
     }
+
+    &+label {
+      cursor: pointer;
+    }
   }
 
   &.disabled {

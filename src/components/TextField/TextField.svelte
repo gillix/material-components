@@ -3,15 +3,18 @@
   import Icon from '../Icon';
   import uid from '../../internal/uid';
   import clearIcon from '../../internal/Icons/close';
+  import { imask } from '@imask/svelte';
 
   let klass = '';
   export { klass as class };
+  export let active = false;
   export let value = '';
   export let color = 'primary';
   export let filled = false;
   export let solo = false;
   export let outlined = false;
   export let flat = false;
+  export let ghost = false;
   export let dense = false;
   export let rounded = false;
   export let clearable = false;
@@ -29,17 +32,29 @@
   export let id = `s-input-${uid(5)}`;
   export let style = null;
   export let inputElement = null;
+  export let mask = "";
+  let input = value;
+  $: if (!mask) {
+    input = value;
+  }
+
+  let maskOptions = false;
+  $: if (mask) {
+    maskOptions = typeof mask === 'object' ? mask : {
+      mask: mask,
+      masked: false,
+      lazy: true
+    };
+//        value = maskOptions.masked ? msk.value : msk.unmaskedValue;
+  }
 
   let focused = false;
-  $: labelActive = !!placeholder || value || focused;
+  $: labelActive = active || !!placeholder || value || focused;
   let errorMessages = [];
 
   export function validate() {
     errorMessages = rules.map((r) => r(value)).filter((r) => typeof r === 'string');
-    if (errorMessages.length) error = true;
-    else {
-      error = false;
-    }
+    error = !!errorMessages.length;
     return error;
   }
 
@@ -58,11 +73,28 @@
 
   function onInput() {
     if (!validateOnBlur) validate();
+    if (!mask) {
+      value = inputElement.value;
+    }
   }
+
+  function maskComplete({detail: msk}) {
+    // value = msk.unmaskedValue;
+    // input = msk.value;
+    // console.log('complete:' + msk.unmaskedValue)
+
+  }
+
+  function maskAccept({detail: msk}) {
+    value = maskOptions.masked ? msk.value : msk.unmaskedValue;
+    input = msk.value;
+  }
+
+
 </script>
 
 <Input
-  class="s-text-field {klass}"
+  class="{klass} s-text-field"
   {color}
   {dense}
   {readonly}
@@ -78,7 +110,10 @@
     class:solo
     class:outlined
     class:flat
-    class:rounded>
+    class:ghost
+    class:rounded
+    class:active={active || focused}
+  >
     <!-- Slot for prepend inside the input. -->
     <slot name="prepend" />
 
@@ -106,6 +141,9 @@
         on:keypress
         on:keydown
         on:keyup
+        use:imask={maskOptions}
+        on:accept={maskAccept}
+        on:complete={maskComplete}
         {...$$restProps} />
     </div>
 
@@ -122,13 +160,23 @@
     <slot name="append" />
   </div>
 
-  <div slot="messages">
-    <div>
-      <span>{hint}</span>
-      {#each messages as message}<span>{message}</span>{/each}
-      {#each errorMessages.slice(0, errorCount) as message}<span>{message}</span>{/each}
-    </div>
-    {#if counter}<span>{value.length} / {counter}</span>{/if}
+  <div
+      slot="messages"
+      class:outlined
+      class:filled
+  >
+    {#if errorMessages.length}
+      {#each errorMessages.slice(0, errorCount) as message}<div class="message">{message}</div>{/each}
+    {:else}
+      {#if messages.length}
+        {#each messages as message}<div class="message">{message}</div>{/each}
+      {:else}
+        <div class="message">{hint}</div>
+      {/if}
+    {/if}
+    {#if counter}
+      <div class="counter">{value.length} / {counter}</div>
+    {/if}
   </div>
 
   <!-- Slot for append outside the input. -->

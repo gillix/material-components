@@ -4,12 +4,16 @@
   import uid from '../../internal/uid';
   import clearIcon from '../../internal/Icons/close';
 
+  let klass = '';
+  export { klass as class };
   export let value = '';
+  export let active = false;
   export let color = 'primary';
   export let filled = false;
   export let solo = false;
   export let outlined = false;
   export let flat = false;
+  export let ghost = false;
   export let rounded = false;
   export let clearable = false;
   export let readonly = false;
@@ -31,15 +35,12 @@
   export let textarea = null;
 
   let focused = false;
-  $: labelActive = !!placeholder || value || focused;
+  $: labelActive = active || !!placeholder || value || focused;
   let errorMessages = [];
 
   export function validate() {
     errorMessages = rules.map((r) => r(value)).filter((r) => typeof r === 'string');
-    if (errorMessages.length) error = true;
-    else {
-      error = false;
-    }
+    error = !!errorMessages.length;
     return error;
   }
 
@@ -69,7 +70,7 @@
 </script>
 
 <Input
-  class="s-text-field s-textarea"
+  class="{klass} s-text-field s-textarea"
   {color}
   {readonly}
   {disabled}
@@ -84,9 +85,12 @@
     class:solo
     class:outlined
     class:flat
+    class:ghost
     class:rounded
     class:autogrow
-    class:no-resize={noResize || autogrow}>
+    class:no-resize={noResize || autogrow}
+    class:active={active || focused}
+  >
     <!-- Slot for prepend inside the input. -->
     <slot name="prepend" />
 
@@ -126,13 +130,23 @@
     <slot name="append" />
   </div>
 
-  <div slot="messages">
-    <div>
-      <span>{hint}</span>
-      {#each messages as message}<span>{message}</span>{/each}
-      {#each errorMessages.slice(0, errorCount) as message}<span>{message}</span>{/each}
-    </div>
-    {#if counter}<span>{value.length} / {counter}</span>{/if}
+  <div
+      slot="messages"
+      class:outlined
+      class:filled
+  >
+    {#if errorMessages.length}
+      {#each errorMessages.slice(0, errorCount) as message}<div class="message">{message}</div>{/each}
+    {:else}
+      {#if messages.length}
+        {#each messages as message}<div class="message">{message}</div>{/each}
+      {:else}
+        <div class="message">{hint}</div>
+      {/if}
+    {/if}
+    {#if counter}
+      <div class="counter">{value.length} / {counter}</div>
+    {/if}
   </div>
 
   <!-- Slot for append outside the input. -->
