@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
-const { preprocess } = require('svelte/compiler');
-const fs = require('fs');
-const path = require('path');
-const glob = require('glob');
-const sveltePreprocess = require('svelte-preprocess');
-const process = require('process');
-const del = require('del');
+import { preprocess } from 'svelte/compiler';
+import fs from 'fs';
+import path from 'path';
+import glob from 'glob';
+import sveltePreprocess from 'svelte-preprocess';
+import process from 'process';
+import del from 'del';
+import cssnano from 'cssnano';
 
 const BASE = process.cwd();
 const processor = sveltePreprocess({
@@ -13,7 +14,7 @@ const processor = sveltePreprocess({
     includePaths: [path.join(BASE, 'theme')],
   },
   postcss: {
-    plugins: [require('cssnano')()],
+    plugins: [cssnano()],
   },
 });
 
@@ -34,6 +35,7 @@ glob('src/**/*.svelte', {}, async (_, files) => {
 
 process.chdir(BASE);
 
+//glob('src/**/*.+(js|ts)', {}, (_, files) => {
 glob('src/**/*.js', {}, (_, files) => {
   files.forEach((file) => {
     const outFolder = path.join(BASE, path.dirname(file.replace('src', 'dist')));

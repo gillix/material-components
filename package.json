@@ -1,11 +1,12 @@
 {
   "name": "material-components",
-  "version": "0.3.17",
+  "version": "0.3.22",
   "description": "A material design framework/component library for Svelte, with full support for light and dark themes and customisability.",
   "license": "MIT",
   "author": "Karas",
   "main": "compiled/index.js",
   "module": "compiled/index.mjs",
+  "type": "module",
   "scripts": {
     "build": "concurrently \"yarn:build:js\" \"yarn:build:minimal\"",
     "build:js": "rollup -c",
@@ -16,9 +17,6 @@
     "version": "standard-changelog && git add CHANGELOG.md"
   },
   "files": [
-    "@types",
-    "compiled",
-    "dist",
     "src"
   ],
   "keywords": [
@@ -36,35 +34,41 @@
     "ui-kit"
   ],
   "peerDependencies": {
-    "svelte": ">=3.29.4"
+    "svelte": "*"
   },
   "devDependencies": {
+    "@babel/core": "*",
+    "@babel/preset-env": "*",
     "@imask/svelte": "*",
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
-    "@rollup/plugin-commonjs": "^17.1.0",
-    "@rollup/plugin-node-resolve": "^11.1.1",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/svelte": "^3.0.3",
-    "babel-jest": "^26.6.3",
+    "@rollup/plugin-commonjs": "*",
+    "@rollup/plugin-node-resolve": "*",
+    "@rollup/plugin-typescript": "*",
+    "@testing-library/jest-dom": "*",
+    "@testing-library/svelte": "*",
+    "@tsconfig/svelte": "*",
+    "babel-jest": "*",
     "concurrently": "^5.3.0",
     "cssnano": "4.1.10",
     "del": "^6.0.0",
     "glob": "^7.1.6",
     "jest": "^26.6.3",
     "postcss": "^8.2.4",
-    "rollup": "^2.38.4",
-    "rollup-plugin-bundle-size": "^1.0.3",
-    "rollup-plugin-svelte": "^7.1.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "sass": "^1.32.6",
-    "standard-changelog": "^2.0.24",
-    "svelte": "^3.32.1",
-    "svelte-check": "^1.1.32",
-    "svelte-htm": "^1.1.1",
-    "svelte-jester": "^1.3.0",
-    "svelte-preprocess": "^4.6.5"
+    "rollup": "*",
+    "rollup-plugin-bundle-size": "*",
+    "rollup-plugin-svelte": "*",
+    "rollup-plugin-terser": "*",
+    "sass": "*",
+    "standard-changelog": "*",
+    "svelte": "*",
+    "svelte-check": "*",
+    "svelte-htm": "*",
+    "svelte-jester": "^*",
+    "svelte-portal": "*",
+    "svelte-preprocess": "*",
+    "typescript": "~5.2.2"
   },
-  "types": "@types/index.d.ts",
-  "svelte": "dist/index.js"
+  "svelte": "src/index.js",
+  "dependencies": {
+    "process": "^0.11.10"
+  }
 }

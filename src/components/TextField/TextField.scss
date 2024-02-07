@@ -3,8 +3,7 @@
 .s-text-field__input {
   display: flex;
   flex-grow: 1;
-
-
+  align-items: center;
 
   label {
     position: absolute;
@@ -30,6 +29,21 @@
     max-width: 100%;
     min-width: 0;
     width: 100%;
+
+    &:read-only {
+        user-select: none;
+        //pointer-events: none;
+    }
+  }
+
+  .s-text-field__prefix {
+    padding: $text-field-prefix-padding;
+    opacity: .6;
+  }
+
+  .s-text-field__suffix {
+    padding: $text-field-suffix-padding;
+    opacity: .6;
   }
 
 }
@@ -248,7 +262,9 @@
     .s-text-field__wrapper {
       &.outlined,
       &.filled {
-        min-height: $text-field-filled-outlined-dense-min-height;
+        .s-text-field__input {
+          min-height: $text-field-filled-outlined-dense-min-height;
+        }
       }
 
       &.outlined {
@@ -290,13 +306,15 @@
   padding: 0 12px;
 }
 
-//[slot=messages] .message::before {
-//  display: inline-block;
-//  width: 0;
-//  height: 16px;
-//  content: "";
-//  vertical-align: 0;
-//}
+
+
+[slot=messages] .message:not(:empty)::before {
+  display: inline-block;
+  width: 0;
+  height: 16px;
+  content: "";
+  vertical-align: 0;
+}
 
 [slot=messages] .message {
   animation: .3s input-details-message;

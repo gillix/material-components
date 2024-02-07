@@ -1,9 +1,16 @@
 const filter = (classes) => classes.filter((x) => !!x);
 const format = (classes) => classes.split(' ').filter((x) => !!x);
 
+export function stringify(classes) {
+  if (Array.isArray(classes)) return classes.map(item => stringify(item)).join(' ');
+  if (typeof classes === 'object') return Object.keys(classes).filter(key => classes[key]).join(' ');
+  if (typeof classes === 'string') return classes;
+  return '';
+}
+
 /**
  * @param node {Element}
- * @param classes {Array<string>}
+ * @param _classes {Array<string>}
  */
 export default (node, _classes) => {
   let classes = _classes;

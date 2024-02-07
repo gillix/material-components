@@ -1,23 +1,35 @@
 <script>
-  import { getContext } from 'svelte';
+    import style, {stringify} from '../../internal/Style';
 
   let klass = '';
   export { klass as class };
 
-  export let numeric = false;
+  export let tag = 'td';
+  export let align = 'start';
+  export let fixed = false;
+  export let fixedOffset = 0;
+  export let noPadding = false;
+  export let noWrap = false;
+  export let height = null;
+  export let width = null;
 
-  const isTableHead = getContext('is-table-head') === true;
 </script>
 
-<style lang="scss" src="./DataTableCell.scss" global>
-</style>
+<!--<style lang="scss" src="./DataTableCell.scss" global>-->
+<!--</style>-->
 
-{#if isTableHead}
-  <th class="s-tbl-cell {klass}" class:numeric>
+<svelte:element
+        this={tag}
+        class="s-data-table__{tag} {klass} s-data-table-column--align-{align}"
+        class:s-table-column--no-padding={noPadding}
+        class:s-table-column--no-wrap={noWrap}
+        class:s-table-column--fixed={fixed}
+        style={stringify({
+            height,
+            'width': width,
+            left: fixedOffset || null
+        })}
+        on:click
+>
     <slot />
-  </th>
-{:else}
-  <td class="s-tbl-cell {klass}" class:numeric>
-    <slot />
-  </td>
-{/if}
+</svelte:element>

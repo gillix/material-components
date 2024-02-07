@@ -14,7 +14,6 @@
 .s-menu {
   background-color: var(--theme-surface);
   backface-visibility: hidden;
-  position: absolute;
   contain: content;
   max-height: $menu-max-height;
   overflow: auto;
@@ -23,4 +22,14 @@
   &:not(.tile) {
     border-radius: $menu-content-border-radius;
   }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    padding: 1px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+  }
+
 }

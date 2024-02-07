@@ -6,6 +6,8 @@
   export let size = '24px';
   export let width = size;
   export let height = size;
+  export let viewX = '0';
+  export let viewY = '0';
   export let viewWidth = '24';
   export let viewHeight = '24';
   export let rotate = 0;
@@ -29,7 +31,7 @@
   class:spin
   aria-label={label}
   class:disabled
-  use:Style={{ 'icon-size': size, 'icon-rotate': `${rotate}deg` }}
+  use:Style={ { 'icon-size': size, 'icon-rotate': `${rotate}deg` } }
   aria-disabled={disabled}
   {style}>
   {#if path}
@@ -37,7 +39,7 @@
       xmlns="http://www.w3.org/2000/svg"
       {width}
       {height}
-      viewBox="0 0 {viewWidth} {viewHeight}">
+      viewBox="{viewX} {viewY} {viewWidth} {viewHeight}">
       <path d={path}>
         {#if label}
           <title>{label}</title>

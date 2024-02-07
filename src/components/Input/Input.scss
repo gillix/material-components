@@ -52,7 +52,7 @@
     max-height: $input-max-height;
   }
 
-  .dense {
+  &.dense {
     input {
       max-height: $input-dense-max-height;
     }
@@ -117,6 +117,10 @@
     color: var(--theme-text-secondary);
     white-space: nowrap;
     transition: $primary-transition;
+
+    &:empty {
+        display: none;
+    }
   }
 
   &:focus-within {

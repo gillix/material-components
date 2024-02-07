@@ -1,19 +1,13 @@
 <script>
   import ClickOutside from '../../actions/ClickOutside';
-  import { onMount, setContext, createEventDispatcher } from 'svelte';
+  import {onMount, setContext, createEventDispatcher, tick} from 'svelte';
   import { fade } from 'svelte/transition';
+  import { portal } from 'svelte-portal';
+  import {Overlay} from '../Overlay';
 
   let klass = '';
   export { klass as class };
   export let active = false;
-  export let absolute = false;
-  export let transition = fade;
-  export let inOpts = { duration: 250 };
-  export let outOpts = { duration: 200 };
-  export let offsetX = false;
-  export let offsetY = true;
-  export let nudgeX = 0;
-  export let nudgeY = 0;
   export let openOnClick = true;
   export let hover = false;
   export let closeOnClickOutside = true;
@@ -24,6 +18,7 @@
   export let disabled = false;
   export let index = 8;
   export let style = '';
+  export let overlay = {};
 
   let origin = 'top left';
   let position;
@@ -35,25 +30,8 @@
   setContext('S_ListItemRipple', true);
 
   // For opening the menu
-  function open(posX = 0, posY = 0) {
+  function open() {
     active = true;
-    const rect = wrapper.getBoundingClientRect();
-    let x = nudgeX;
-    let y = nudgeY;
-    if (absolute) {
-      x += posX;
-      y += posY;
-    } else {
-      if (offsetX) x += rect.width;
-      if (offsetY) y += rect.height;
-    }
-
-    position = `${align.y}:${y}px;${align.x}:${x}px`;
-    origin = `${align.y} ${align.x}`;
-    /**
-     * Event when menu is opened.
-     * @returns Nothing
-     */
     dispatch('open');
   }
 
@@ -71,9 +49,10 @@
   function triggerClick(e) {
     if (!disabled) {
       if (active) {
-        close();
+          e.preventDefault();
+          close();
       } else if (openOnClick) {
-        open(e.offsetX, e.offsetY);
+          open();
       }
     }
   }
@@ -83,24 +62,24 @@
     if (active && closeOnClick) close();
   }
 
-  // When user clicked somewhere outside the menu.
-  function clickOutsideMenu() {
-    if (active && closeOnClickOutside) close();
-  }
+
+  let activator = null;
 
   onMount(() => {
-    const trigger = wrapper.querySelector("[slot='activator']");
-    // Opening the menu if active is set to true.
-    if (active) open();
+      tick().then(() => {
+          activator = wrapper.querySelector("[slot='activator']");
+          activator.addEventListener('click', triggerClick);
 
-    trigger.addEventListener('click', triggerClick, { passive: true });
-    if (hover) {
-      wrapper.addEventListener('mouseenter', open, { passive: true });
-      wrapper.addEventListener('mouseleave', close, { passive: true });
-    }
+          if (hover) {
+              wrapper.addEventListener('mouseenter', open, { passive: true });
+              wrapper.addEventListener('mouseleave', close, { passive: true });
+          }
+
+      })
 
     return () => {
-      trigger.removeEventListener('click', triggerClick);
+      activator.removeEventListener('click', triggerClick);
+
       if (hover) {
         wrapper.removeEventListener('mouseenter', open);
         wrapper.removeEventListener('mouseleave', close);
@@ -115,21 +94,26 @@
 <div
   class="s-menu__wrapper"
   bind:this={wrapper}
-  use:ClickOutside
-  on:clickOutside={clickOutsideMenu}>
+>
   <!-- Slot for the trigger/activator. -->
   <slot name="activator" />
 
-  {#if active}
+<Overlay
+        {...overlay}
+        bind:active
+        persistent={!closeOnClickOutside}
+        activator={activator}
+        scrim={false}
+>
     <div
       class="s-menu {klass}"
       role="menu"
       class:tile
+      aria-controls="menu"
       on:click={menuClick}
-      in:transition={inOpts}
-      out:transition={outOpts}
-      style="{position};transform-origin:{origin};z-index:{index};{style}">
+      style="z-index:{index};{style}"
+    >
       <slot />
     </div>
-  {/if}
+</Overlay>
 </div>

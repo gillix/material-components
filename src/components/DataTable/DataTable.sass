@@ -1,0 +1,145 @@
+@use '../Table/variables' as *
+@use './variables' as *
+
+
+.s-data-table
+  width: 100%
+
+.s-data-table__table
+  width: 100%
+  border-collapse: separate
+  border-spacing: 0
+
+.s-data-table__tr
+  &--focus
+    border: 1px dotted black
+
+  &--clickable
+    cursor: pointer
+
+.s-data-table
+  .s-table__wrapper
+    > table
+      > thead,
+        tbody
+        > tr
+          > td,
+            th
+
+            &.s-data-table-column--align-end
+              text-align: end
+
+              .s-data-table-header__content
+                flex-direction: row-reverse
+
+            &.s-data-table-column--align-center
+              text-align: center
+
+              .s-data-table-header__content
+                justify-content: center
+
+            &.s-data-table-column--no-padding
+              padding: 0 8px
+
+          > th
+            align-items: center
+
+          > th.s-data-table-column--fixed
+            position: sticky
+
+          > th.s-data-table-column--sortable:hover
+            cursor: pointer
+            color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+          > th:not(.s-data-table-column--sorted)
+              .s-data-table-header__sort-icon
+                opacity: 0
+
+              &:hover
+                .s-data-table-header__sort-icon
+                  opacity: 0.5
+
+.s-data-table-column--fixed
+  background: $table-background
+  position: sticky !important
+  left: 0
+  z-index: 1
+
+.s-data-table-column--last-fixed
+  border-right: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
+
+.s-data-table.v-table--fixed-header > .v-table__wrapper > table > thead > tr > th.s-data-table-column--fixed
+  z-index: 2
+
+.s-data-table-group-header-row
+  td
+    background: var(--theme-surface)
+    color: var(--theme-text-primary)
+
+    > span
+      padding-left: 5px
+
+.s-data-table--loading
+  .s-data-table__td,
+  .s-data-table__th
+    opacity: 0.3
+
+.s-data-table-group-header-row__column
+  padding-left: calc(var(--s-data-table-group-header-row-depth) * 16px) !important
+
+.s-data-table-header__content
+  display: flex
+  align-items: center
+  gap: 5px
+
+//.s-data-table-header__sort-badge
+//  display: inline-flex
+//  justify-content: center
+//  align-items: center
+//  font-size: 0.875rem
+//  padding: 4px
+//  border-radius: 50%
+//  background: $data-table-header-sort-badge-color
+//  min-width: $data-table-header-sort-badge-size
+//  min-height: $data-table-header-sort-badge-size
+//  width: $data-table-header-sort-badge-size
+//  height: $data-table-header-sort-badge-size
+
+.s-data-table-progress
+  > th
+    border: none !important
+    height: auto !important
+    padding: 0 !important
+
+.s-data-table-progress__loader
+  position: relative
+
+.s-data-table-rows-loading,
+.s-data-table-rows-no-data
+  text-align: center
+
+
+.s-data-table-value__sequence,
+.s-data-table-value__complex
+  display: inline-flex
+  gap: 5px
+  height: 100%
+  align-items: center
+
+  .content
+    display: inline-flex
+    gap: 3px
+    height: 100%
+    align-items: center
+
+    >.suffix,
+     .prefix
+       opacity: .4
+       font-weight: 500
+
+.s-data-table__footer
+  display: flex
+  justify-content: space-between
+  align-content: end
+  padding: 10px 20px
+

@@ -8,4 +8,4 @@ $tooltip-transition-timing-function: map-get($transitions, 'linear-out-slow-in')
 $tooltip-transition-enter-duration: 300ms !default;
 $tooltip-transition-leave-duration: 300ms !default;
 $tooltip-padding: 5px 16px !default;
-$tooltip-z-index: 1000 !default;
+$tooltip-z-index: 10000 !default;

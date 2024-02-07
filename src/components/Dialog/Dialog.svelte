@@ -1,6 +1,5 @@
 <script>
   import Overlay from '../Overlay';
-  import Style from '../../internal/Style';
   import { scale } from 'svelte/transition';
 
   let klass = '';
@@ -23,18 +22,23 @@
 <style lang="scss" src="./Dialog.scss" global>
 </style>
 
-{#if visible}
-  <div role="document" class="s-dialog" use:Style={{ 'dialog-width': width, 'dialog-height': height }}>
+<Overlay
+        {...overlay}
+        bind:active={visible}
+        on:click={close}
+        {persistent}
+        class="s-dialog {fullscreen ? 'fullscreen' : ''} {klass}"
+        style="--s-dialog-width: {width}; --s-dialog-height: {height};"
+>
     <div
-      class="s-dialog__content {klass}"
+      class="s-dialog__content"
       class:fullscreen
-      transition:transition={{ duration: 300, start: 0.1 }}
+      transition:transition={ { duration: 200, start: 0.1 } }
       on:introstart
       on:outrostart
       on:introend
-      on:outroend>
-      <slot />
+      on:outroend
+    >
+        <slot />
     </div>
-  </div>
-{/if}
-<Overlay {...overlay} active={visible} on:click={close} />
+</Overlay>

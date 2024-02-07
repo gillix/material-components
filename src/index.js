@@ -21,7 +21,7 @@ export { default as Chip } from './components/Chip';
 export {
   default as DataTable,
   DataTableHead,
-  DataTableBody,
+  DataTableRows,
   DataTableRow,
   DataTableCell,
 } from './components/DataTable';

@@ -298,6 +298,7 @@ $material-light-theme: map-deep-merge(
       'active': material-color('grey', 'lighten-4'),
       'hover': material-color('grey', 'lighten-3'),
       'group': material-color('grey', 'lighten-3'),
+      'border': rgba(material-color('shades', 'black'), 0.12),
     ),
     'datatables': (
       'row-hover': rgba(material-color('shades', 'black'), 0.04),

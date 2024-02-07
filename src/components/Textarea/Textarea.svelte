@@ -1,3 +1,4 @@
+<svelte:options accessors/>
 <script>
   import Input from '../Input';
   import Icon from '../Icon';

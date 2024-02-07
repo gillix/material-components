@@ -1,82 +1,100 @@
 @import './variables';
 
-.s-dialog {
+.s-overlay.s-dialog {
   align-items: center;
-  display: flex;
-  height: 100%;
   justify-content: center;
-  left: 0;
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  transition: 0.2s map-get($transitions, 'fast-in-fast-out'), z-index 1ms;
-  width: 100%;
-  z-index: 6;
-  outline: none;
-}
 
-.s-dialog__content {
-  background-color: var(--theme-surface);
-  //overflow: hidden;
-  border-radius: 0;
-  pointer-events: auto;
-  z-index: inherit;
-  @include elevation($dialog-elevation);
-  width: 100%;
-  margin: 0;
 
   &.fixed-height {
-    height: 100%;
+    .s-overlay__content {
+      height: 100%;
+    }
   }
 
   &.fullscreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
+    .s-overlay__content {
 
-  > .s-card {
-    > .s-card-title {
-      font-size: $dialog-card-title-font-size;
-      font-weight: $dialog-card-title-font-weight;
-      letter-spacing: $dialog-card-title-letter-spacing;
-      padding: $dialog-card-title-padding;
-    }
-
-    > .s-card-text {
-      padding: $dialog-card-text-padding;
-    }
-
-    > .s-card-subtitle {
-      padding: $dialog-card-subtitle-padding;
+      position: fixed;
+      top: 0;
+      left: 0;
     }
   }
-}
 
-.fullscreen {
-  > .s-card {
-    min-height: 100%;
-    min-width: 100%;
-    margin: 0 !important;
-    padding: 0 !important;
+  .s-overlay__content {
+    pointer-events: auto;
+    z-index: inherit;
+    width: 100%;
+    margin: 0;
+
+    .s-dialog__content {
+      background-color: var(--theme-surface);
+      border-radius: 0;
+      @include elevation($dialog-elevation);
+      height: 100%;
+
+      > .s-card {
+        > .s-card-title {
+          font-size: $dialog-card-title-font-size;
+          font-weight: $dialog-card-title-font-weight;
+          letter-spacing: $dialog-card-title-letter-spacing;
+          padding: $dialog-card-title-padding;
+        }
+
+        > .s-card-text {
+          padding: $dialog-card-text-padding;
+//          overflow: auto;
+        }
+
+        > .s-card-subtitle {
+          padding: $dialog-card-subtitle-padding;
+        }
+      }
+    }
+
   }
+
+  &.fullscreen .s-dialog__content {
+    > .s-card {
+      min-height: 100%;
+      min-width: 100%;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+
+  *::-webkit-scrollbar {
+    width: 4px;
+    padding: 1px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+  }
+
 }
 
 @media (min-width: $dialog-fullscreen-trigger) {
-  .s-dialog__content {
+  .s-overlay.s-dialog {
 
-    &:not(.fullscreen) {
-      border-radius: $dialog-border-radius;
-      width: $dialog-width;
-      max-width: var(--s-dialog-width);
-      margin: $dialog-margin;
-      max-height: $dialog-height;
-      //overflow: hidden;
+      &:not(.fullscreen) {
+        .s-overlay__content {
+          width: $dialog-width;
+          max-width: var(--s-dialog-width);
+          margin: $dialog-margin;
+          max-height: $dialog-height;
+        }
 
-      &.fixed-height {
-        height: $dialog-height;
-        max-height: var(--s-dialog-height);
+        .s-dialog__content {
+          border-radius: $dialog-border-radius;
+          overflow: hidden;
+        }
+
+        &.fixed-height {
+          .s-overlay__content {
+            height: $dialog-height;
+            max-height: var(--s-dialog-height);
+          }
+        }
       }
     }
-  }
 }

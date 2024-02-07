@@ -44,6 +44,7 @@
   aria-disabled={disabled}
   use:Ripple={ripple}
   on:click
+  on:focus
   {...$$restProps}>
   <span class="s-btn__content">
     <slot />

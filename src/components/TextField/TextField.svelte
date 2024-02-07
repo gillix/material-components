@@ -1,3 +1,4 @@
+<svelte:options accessors/>
 <script>
   import Input from '../Input';
   import Icon from '../Icon';
@@ -13,6 +14,8 @@
   export let filled = false;
   export let solo = false;
   export let outlined = false;
+  export let prefix = '';
+  export let suffix = '';
   export let flat = false;
   export let ghost = false;
   export let dense = false;
@@ -33,6 +36,8 @@
   export let style = null;
   export let inputElement = null;
   export let mask = "";
+  export let password = false;
+
   let input = value;
   $: if (!mask) {
     input = value;
@@ -121,10 +126,15 @@
       <label for={id} class:active={labelActive}>
         <slot />
       </label>
+
+      {#if (prefix)}
+        <span class="s-text-field__prefix">{prefix}</span>
+      {/if}
+
       <slot name="content" />
+
       <!-- keypress Event is deprecated. Use keydown or keyup instead -->
       <input
-        type="text"
         bind:this={inputElement}
         bind:value
         {placeholder}
@@ -144,7 +154,13 @@
         use:imask={maskOptions}
         on:accept={maskAccept}
         on:complete={maskComplete}
+        {...{type: password ? 'password' : 'text'}}
         {...$$restProps} />
+
+      {#if (suffix)}
+        <span class="s-text-field__suffix">{suffix}</span>
+      {/if}
+
     </div>
 
     {#if clearable && value !== ''}
@@ -155,6 +171,7 @@
         </slot>
       </div>
     {/if}
+
 
     <!-- Slot for append inside the input. -->
     <slot name="append" />

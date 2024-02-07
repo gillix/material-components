@@ -30,4 +30,15 @@
       margin: $select-chip-margin;
     }
   }
+
+}
+
+.s-menu {
+  overflow: hidden;
+
+  .virtual-scroll {
+    overflow: auto;
+    max-height: inherit;
+    contain: content;
+  }
 }

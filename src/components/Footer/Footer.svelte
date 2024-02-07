@@ -8,7 +8,7 @@
   export let style = null;
 </script>
 
-<style lang="scss" src="./Footer.scss" global>
+<style lang="scss" src="./Footer.scss" >
 </style>
 
 <footer
