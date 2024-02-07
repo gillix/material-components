@@ -1,8 +1,5 @@
 <script>
-  import ClickOutside from '../../actions/ClickOutside';
   import {onMount, setContext, createEventDispatcher, tick} from 'svelte';
-  import { fade } from 'svelte/transition';
-  import { portal } from 'svelte-portal';
   import {Overlay} from '../Overlay';
 
   let klass = '';
