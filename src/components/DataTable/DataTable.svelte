@@ -20,6 +20,8 @@
     export let sorted = {};
     export let loading = false;
     export let highlightSorting = false;
+    export let hover = false;
+    export let clickable = false;
     export let pagination = false;
     export let paginationOptions = {};
     export let texts = {
@@ -72,6 +74,9 @@
               {rows}
               {loading}
               {texts}
+              {hover}
+              {clickable}
+              on:rowClick
           />
       </slot>
   </tbody>

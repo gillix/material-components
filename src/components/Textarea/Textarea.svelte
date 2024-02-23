@@ -19,6 +19,7 @@
   export let clearable = false;
   export let readonly = false;
   export let rows = 5;
+  export let limit = false;
   export let autogrow = false;
   export let noResize = false;
   export let disabled = false;
@@ -115,6 +116,7 @@
         on:blur
         on:input
         on:change
+        maxlength={limit}
         {...$$restProps} />
     </div>
 

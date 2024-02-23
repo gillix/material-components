@@ -5,22 +5,41 @@
   import defaults from "./defaults.js";
   import {stringify} from "../../internal/Class/index.js";
   import {sorted} from "./sorting.js";
+  import {createEventDispatcher} from "svelte";
 
   let klass = '';
   export { klass as class };
 
   export let clickable = false;
+  export let hover = false;
   export let columns;
   export let row;
 
+  const dispatch = createEventDispatcher();
+
+  function onRowClick() {
+      if (clickable) {
+          if (clickable instanceof Function) {
+              clickable(row);
+          } else {
+              dispatch('rowClick', row);
+          }
+      }
+  }
 
   // TODO: use existing ITEM_GROUP context for selection
 </script>
 
 <tr
-    class="s-data-table-row {klass}"
-    class:clickable
-    on:click
+    class={stringify([
+        's-data-table-row',
+        klass,
+        {
+            's-data-table__tr--highlight-hover': !!hover,
+            's-data-table__tr--clickable': !!clickable,
+        }
+    ])}
+    on:click={onRowClick}
 >
   {#each columns as column}
     <DataTableCell

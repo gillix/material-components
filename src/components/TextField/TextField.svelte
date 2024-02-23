@@ -26,6 +26,7 @@
   export let placeholder = null;
   export let hint = '';
   export let counter = false;
+  export let limit = false;
   export let messages = [];
   export let rules = [];
   export let errorCount = 1;
@@ -154,6 +155,7 @@
         use:imask={maskOptions}
         on:accept={maskAccept}
         on:complete={maskComplete}
+        maxlength={limit}
         {...{type: password ? 'password' : 'text'}}
         {...$$restProps} />
 

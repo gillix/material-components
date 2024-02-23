@@ -63,14 +63,23 @@
   }
 
   *::-webkit-scrollbar {
-    width: 4px;
+    width: 5px;
     padding: 1px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    border: 2px solid transparent;
   }
 
   *::-webkit-scrollbar-thumb {
     background-color: #aaa;
   }
 
+  .overflow-content {
+    scrollbar-color: initial;
+//    scrollbar-gutter: stable;
+    scrollbar-width: initial;
+  }
 }
 
 @media (min-width: $dialog-fullscreen-trigger) {

@@ -123,10 +123,10 @@
 
   &.disabled {
     pointer-events: none;
-    color: var(--theme-buttons-disabled);
+    color: var(--theme-buttons-disabled) !important;
 
     &:not(.flat):not(.text):not(.outlined) {
-      background-color: var(--theme-buttons-disabled);
+      background-color: var(--theme-buttons-disabled) !important;
     }
   }
 

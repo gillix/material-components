@@ -2,6 +2,8 @@
 
     import {DataTableRow} from "./index.js";
 
+    export let clickable = false;
+    export let hover = false;
     export let columns;
     export let rows;
     export let loading;
@@ -26,7 +28,7 @@
 {/if}
 {#if (!loading && !rows.length && !hideNoData)}
     <tr
-        class="s-data-table-rows-empty"
+        class="s-data-table-rows-no-data"
         key="empty"
     >
         <td colspan={ columns.length }>
@@ -42,6 +44,9 @@
             <DataTableRow
                     {columns}
                     {row}
+                    on:rowClick
+                    {clickable}
+                    {hover}
             />
         </slot>
     {/each}

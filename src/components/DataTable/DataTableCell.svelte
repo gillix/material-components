@@ -21,9 +21,9 @@
 <svelte:element
         this={tag}
         class="s-data-table__{tag} {klass} s-data-table-column--align-{align}"
-        class:s-table-column--no-padding={noPadding}
-        class:s-table-column--no-wrap={noWrap}
-        class:s-table-column--fixed={fixed}
+        class:s-data-table-column--no-padding={noPadding}
+        class:s-data-table-column--no-wrap={noWrap}
+        class:s-data-table-column--fixed={fixed}
         style={stringify({
             height,
             'width': width,
