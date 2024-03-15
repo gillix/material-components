@@ -39,7 +39,7 @@
   "devDependencies": {
     "@imask/svelte": "*",
     "svelte": "*",
-    "svelte-preprocess": "*",
+    "svelte-preprocess": "*"
   },
   "svelte": "src/index.js",
   "dependencies": {
