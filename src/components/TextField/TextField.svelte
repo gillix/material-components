@@ -53,6 +53,7 @@
     };
 //        value = maskOptions.masked ? msk.value : msk.unmaskedValue;
   }
+  mask = mask;
 
   let focused = false;
   $: labelActive = active || !!placeholder || value || focused;
