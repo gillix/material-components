@@ -45,15 +45,19 @@
   }
 
   let maskOptions = false;
-  $: if (mask) {
-    maskOptions = typeof mask === 'object' ? mask : {
-      mask: mask,
-      masked: false,
-      lazy: true
-    };
+  initMask();
+  $: mask && initMask();
+
+  function initMask() {
+    if (mask) {
+      maskOptions = typeof mask === 'object' ? mask : {
+        mask: mask,
+        masked: false,
+        lazy: true
+      };
 //        value = maskOptions.masked ? msk.value : msk.unmaskedValue;
+    }
   }
-  mask = mask;
 
   let focused = false;
   $: labelActive = active || !!placeholder || value || focused;
