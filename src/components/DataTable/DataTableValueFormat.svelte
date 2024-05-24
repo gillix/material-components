@@ -28,7 +28,7 @@
         <svelte:self {value} />
     </Chip>
 {:else if (type === 'url')}
-    <a href={value.url} target={value.blank ? '_blank' : false}>{value.value}</a>
+    <a href={value.url} target={value.blank ? '_blank' : '_self'} on:click|capture={e => e.stopPropagation()}>{value.value}</a>
 {:else if (typeof value === 'object')}
     <div class="s-data-table-value__complex">
         {#if (value.prepend)}
