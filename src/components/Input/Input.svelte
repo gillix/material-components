@@ -30,7 +30,10 @@
     <div class="s-input__slot">
       <slot />
     </div>
-    <div class="s-input__details">
+    <div
+        class="s-input__details"
+        use:TextColor={error ? 'error' : 'secondary'}>
+    >
       <slot name="messages" />
     </div>
   </div>
