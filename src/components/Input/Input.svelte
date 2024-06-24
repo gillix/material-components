@@ -32,7 +32,7 @@
     </div>
     <div
         class="s-input__details"
-        use:TextColor={error ? 'error' : 'secondary'}>
+        use:TextColor={error ? 'error' : 'secondary'}
     >
       <slot name="messages" />
     </div>
