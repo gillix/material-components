@@ -123,7 +123,7 @@
 
   &.disabled {
     pointer-events: none;
-    color: var(--theme-buttons-disabled) !important;
+    color: var(--theme-text-disabled) !important;
 
     &:not(.flat):not(.text):not(.outlined) {
       background-color: var(--theme-buttons-disabled) !important;

@@ -24,7 +24,8 @@
   class:readonly
   class:disabled
   {style}
-  use:TextColor={success ? 'success' : error ? 'error' : color}>
+  use:TextColor={success ? 'success' : error ? 'error' : color}
+>
   <slot name="prepend-outer" />
   <div class="s-input__control">
     <div class="s-input__slot">
