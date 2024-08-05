@@ -31,6 +31,8 @@
   {active}
   {disabled}
   on:click={click}
-  on:click>
+  on:click
+  {...$$restProps}
+>
   <slot />
 </Button>
