@@ -132,6 +132,7 @@
     <!-- Slot for append inside the input. -->
     <slot name="append" />
   </div>
+  <slot name="editor-toolbar" />
 
   <div
       slot="messages"
