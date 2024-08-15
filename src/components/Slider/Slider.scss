@@ -1,3 +1,4 @@
+@use "sass:math";
 @import './variables';
 
 /*! nouislider - 14.6.1 - 8/17/2020 */
@@ -88,8 +89,8 @@
   position: absolute;
   width: $slider-thumb-size;
   height: $slider-thumb-size;
-  right: -$slider-thumb-size / 2 + 1;
-  top: -$slider-thumb-size / 2 + 1;
+  right: math.div(-$slider-thumb-size, 2) + 1;
+  top: math.div(-$slider-thumb-size, 2) + 1;
   border-radius: $slider-thumb-border-radius;
   background: currentColor;
   cursor: default;

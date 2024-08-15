@@ -1,3 +1,4 @@
+@use "sass:math";
 @import './variables';
 
 .s-text-field__input {
@@ -296,7 +297,7 @@
       &.filled {
         input,
         textarea {
-          margin-top: $text-field-filled-margin-top / 2;
+          margin-top: math.div($text-field-filled-margin-top, 2);
         }
 
         label {

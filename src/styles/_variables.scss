@@ -61,7 +61,7 @@ $material-dark-theme: () !default;
 $rounded: map-deep-merge(
   (
     0: 0,
-    'sm': $border-radius-root / 2,
+    'sm': math.div($border-radius-root, 2),
     null: $border-radius-root,
     'lg': $border-radius-root * 2,
     'xl': $border-radius-root * 6,
