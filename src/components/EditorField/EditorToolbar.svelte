@@ -1,5 +1,5 @@
 <script>
-    import Toolbar from 'typewriter-editor/dist/Toolbar.svelte';
+    import Toolbar from 'typewriter-editor';
     import Button from "material-components/src/components/Button/Button.svelte";
     import Icon from "material-components/src/components/Icon/Icon.svelte";
     import mdiFormatListBulleted from '@mdi/js'
