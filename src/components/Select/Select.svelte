@@ -42,7 +42,7 @@
   let fetch = (val) => (Array.isArray(val) ? val.map((val) => names[val]) : names[val]);
   let fetchIcon = (val) => items.find((item) => item.value === val)?.icon
   let names = {};
-  for(let i = 0; i < items.length; i++) {
+  $: for(let i = 0; i < items.length; i++) {
     names[items[i].value] = items[i].name;
   }
 
@@ -153,8 +153,8 @@
   }
 
 
-  $: if (active && value) {
-    highlightItem(findItem(value));
+  $: if (active && (Array.isArray(value) ? value.length : value)) {
+    highlightItem(findItem(Array.isArray(value) ? value[0] : value));
   }
 
 </script>
@@ -173,7 +173,7 @@
         {color}
         {disabled}
         {required}
-        value={format(fetch(value))}
+        value={format(fetch(value) ?? '')}
         {placeholder}
         {hint}
         {active}
@@ -222,7 +222,7 @@
                     <Icon path={item.icon} />
                   {/if}
                 </span>
-                {item.name ? item.name : item}
+                {item.name !== undefined ? item.name : item}
               </ListItem>
             </div>
           </slot>
