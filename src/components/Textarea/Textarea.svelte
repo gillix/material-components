@@ -22,6 +22,7 @@
   export let limit = false;
   export let autogrow = false;
   export let noResize = false;
+  export let noWrap = false;
   export let disabled = false;
   export let placeholder = null;
   export let hint = '';
@@ -92,6 +93,7 @@
     class:autogrow
     class:no-resize={noResize || autogrow}
     class:active={active || focused}
+    class:no-wrap={noWrap}
   >
     <!-- Slot for prepend inside the input. -->
     <slot name="prepend" />

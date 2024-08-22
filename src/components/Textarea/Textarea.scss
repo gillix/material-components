@@ -62,5 +62,27 @@
         resize: none;
       }
     }
+
+    &.no-wrap {
+      textarea {
+        white-space: nowrap;
+      }
+    }
+
+    textarea::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+      padding: 1px;
+    }
+
+    textarea::-webkit-scrollbar-thumb:hover {
+      border: 2px solid transparent;
+    }
+
+    textarea::-webkit-scrollbar-thumb {
+      background-color: #aaa;
+      cursor: default;
+    }
+
   }
 }
