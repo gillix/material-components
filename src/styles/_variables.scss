@@ -284,6 +284,13 @@ $material-light-theme: map-deep-merge(
       'outlined-disabled': rgba(material-color('shades', 'black'), 0.26),
       'border': rgba(material-color('shades', 'black'), 0.42),
     ),
+    'editor': (
+      'placeholder': rgba(material-color('shades', 'black'), 0.38),
+      'toolbar': (
+        'outlined': rgba(material-color('shades', 'black'), 0.02),
+        'outlined-border': rgba(material-color('shades', 'black'), 0.06)
+      )
+    ),
     'controls': (
       'disabled': rgba(material-color('shades', 'black'), 0.26),
       'thumb': (
@@ -355,6 +362,13 @@ $material-dark-theme: map-deep-merge(
       'outlined': rgba(material-color('shades', 'white'), 0.24),
       'outlined-disabled': rgba(material-color('shades', 'white'), 0.16),
       'border': rgba(material-color('shades', 'white'), 0.7),
+    ),
+    'editor': (
+      'placeholder': rgba(material-color('shades', 'white'), 0.38),
+      'toolbar': (
+        'outlined': rgba(material-color('shades', 'white'), 0.02),
+        'outlined-border': rgba(material-color('shades', 'white'), 0.06)
+      )
     ),
     'controls': (
       'disabled': rgba(material-color('shades', 'white'), 0.3),

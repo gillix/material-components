@@ -1,15 +1,36 @@
 <script>
-    import Toolbar from 'typewriter-editor';
-    import Button from "material-components/src/components/Button/Button.svelte";
-    import Icon from "material-components/src/components/Icon/Icon.svelte";
-    import mdiFormatListBulleted from '@mdi/js'
+    import { Toolbar } from 'typewriter-editor';
+    import Button from "../Button/Button.svelte";
+    import Icon from "../Icon/Icon.svelte";
+    import {slide} from "svelte/transition";
+    import {formats, toolbar} from "./formats.js";
 
     export let editor;
+    export let buttons = toolbar.mini;
+
 </script>
 <Toolbar {editor} let:active let:commands let:focus>
-    <div class="toolbar" class:active={focus}>
-        <div><Button on:click={commands.bold} active={active.bold} text>B</Button></div>
-        <div><Button on:click={commands.italic} active={active.bold} ><i>I</i></Button></div>
-        <div><Button on:click={commands.list} active={active.list} ><Icon path={mdiFormatListBulleted} /></Button></div>
-    </div>
+    {#if focus}
+        <div class="s-editor-toolbar" transition:slide>
+            {#each buttons as name}
+                <div>
+                    <Button
+                        on:click={formats[name]?.command ? formats[name]?.command(commands, editor) : commands[name]}
+                        active={formats[name]?.active ? formats[name].active(active) : active[name]}
+                        size="default"
+                        icon
+                        class="squared"
+                    >
+                        {@html formats[name]?.caption ?? ''}
+                        {#if (formats[name]?.icon)}
+                            <Icon
+                                size={formats[name]?.iconSize ?? "17px"}
+                                path={formats[name]?.icon}
+                            />
+                        {/if}
+                    </Button>
+                </div>
+            {/each}
+        </div>
+    {/if}
 </Toolbar>

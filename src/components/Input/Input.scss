@@ -1,5 +1,6 @@
 @use '../TextField/TextField.scss';
 @use '../Textarea/Textarea.scss';
+@use '../EditorField/EditorField.scss';
 
 @import './variables';
 
@@ -64,7 +65,8 @@
   }
 
   input,
-  textarea {
+  textarea,
+  div[contenteditable] {
     color: var(--theme-text-primary);
 
     &:invalid {
@@ -134,7 +136,8 @@
     color: var(--theme-text-disabled);
 
     input,
-    textarea {
+    textarea,
+    div[contenteditable] {
       color: var(--theme-text-disabled);
     }
 

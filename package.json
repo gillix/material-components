@@ -41,7 +41,7 @@
     "@mdi/js": "latest",
     "svelte": "*",
     "svelte-preprocess": "*",
-    "typewriter-editor": "latest"
+    "typewriter-editor": "git+https://github.com/gillix/typewriter-editor.git"
   },
   "svelte": "src/index.js",
   "dependencies": {

@@ -1,5 +1,17 @@
 @import './variables';
 
+.s-editor-toolbar {
+  display: flex;
+  gap: 3px;
+  margin-top: 4px;
+  padding: 0 6px;
+  contain: style;
+
+  .squared {
+    border-radius: 4px;
+  }
+}
+
 .s-editor {
   .editor {
     align-self: stretch;
@@ -11,6 +23,44 @@
     padding: $editor-padding;
     width: 100%;
     margin-top: 4px;
+    cursor: text;
+    overflow: auto;
+
+    &[placeholder]::before {
+      content: attr(placeholder);
+      color: var(--theme-editor-placeholder);
+      position: absolute;
+      opacity: 0;
+      transition: 0.1s ease-in-out;
+    }
+
+    &[placeholder].empty:not(:focus)::before {
+      opacity: 1;
+    }
+
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+      padding: 1px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      border: 2px solid transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #aaa;
+      cursor: default;
+      border-radius: 5px;
+    }
+
+  }
+
+  .s-editor__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
   }
 
   .s-text-field__wrapper {
@@ -36,8 +86,22 @@
       }
 
       .editor {
-        margin-top: $editor-outlined-icon-margin-top;
+        //margin-top: $editor-outlined-icon-margin-top;
+        padding: $editor-outlined-padding;
       }
+
+      +.s-editor-toolbar {
+        position: unset;
+        background-color: var(--theme-editor-toolbar-outlined);
+        border-top: 1px solid;
+        border-color: var(--theme-editor-toolbar-outlined-border);
+        margin: 0;
+
+        .squared {
+          border-radius: 0;
+        }
+      }
+
     }
 
     &.solo {
@@ -57,10 +121,5 @@
       }
     }
 
-    &.no-resize {
-      .editor {
-        resize: none;
-      }
-    }
   }
 }
