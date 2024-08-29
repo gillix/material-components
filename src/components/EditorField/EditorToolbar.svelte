@@ -7,6 +7,18 @@
 
     export let editor;
     export let buttons = toolbar.mini;
+    
+    function process(actions, name, option) {
+        if (option) {
+            if (typeof option === 'function') {
+                return option(actions, editor);
+            } else if (typeof option === 'string') {
+                return actions[option];
+            }
+        } else {
+            return actions[name];
+        }
+    }
 
 </script>
 <Toolbar {editor} let:active let:commands let:focus>
@@ -15,8 +27,8 @@
             {#each buttons as name}
                 <div>
                     <Button
-                        on:click={formats[name]?.command ? formats[name]?.command(commands, editor) : commands[name]}
-                        active={formats[name]?.active ? formats[name].active(active) : active[name]}
+                        on:click={process(commands, name, formats[name]?.command)}
+                        active={process(active, name, formats[name]?.active)}
                         size="default"
                         icon
                         class="squared"

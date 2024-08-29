@@ -51,6 +51,7 @@
       aria-selected={active}
       bind:group
       on:click
+      on:change
       {id}
       {value}
       {disabled} />

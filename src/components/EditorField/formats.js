@@ -15,7 +15,7 @@ import {
 } from "@mdi/js";
 
 export const toolbar = {
-    mini: ['bold', 'italic', 'header4', 'header5', 'header6', 'bulletList', 'orderedList']
+    mini: ['bold', 'italic', 'header-smaller', 'header-small', 'bulletList', 'orderedList']
 };
 
 export const formats = {
@@ -74,14 +74,27 @@ export const formats = {
     },
     header4: {
         icon: mdiFormatHeader4,
+        iconSize: '24px',
         active: active => active.header === 4
     },
     header5: {
         icon: mdiFormatHeader5,
+        iconSize: '20px',
         active: active => active.header === 5
     },
     header6: {
         icon: mdiFormatHeader6,
+        iconSize: '16px',
+        active: active => active.header === 6
+    },
+    'header-smaller': {
+        command: 'header5',
+        caption: '<span style="font-size: 18px">H</span>',
+        active: active => active.header === 5
+    },
+    'header-small': {
+        command: 'header6',
+        caption: '<span style="font-size: 18px; text-transform: none; font-weight: 600">h</span>',
         active: active => active.header === 6
     },
     hr: {
