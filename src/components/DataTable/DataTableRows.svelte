@@ -47,6 +47,7 @@
                     on:rowClick
                     {clickable}
                     {hover}
+                    {texts}
             />
         </slot>
     {/each}

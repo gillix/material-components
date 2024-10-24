@@ -14,6 +14,7 @@
   export let hover = false;
   export let columns;
   export let row;
+  export let texts;
 
   const dispatch = createEventDispatcher();
 
@@ -59,7 +60,7 @@
             <Checkbox checked={row.selected} />
         {/if}
         <slot name="cell" {column} value={row[column.key]} >
-            <DataTableValueFormat type={column.type} value={row.values[column.key]} />
+            <DataTableValueFormat type={column.type} value={row.values[column.key]} {texts} />
         </slot>
 
     </DataTableCell>

@@ -25,6 +25,7 @@
     export let pagination = false;
     export let paginationOptions = {};
     export let texts = {
+        locale: 'en-US',
         loading: 'Loading... Please wait',
         noData: 'No data',
         pagination: {
