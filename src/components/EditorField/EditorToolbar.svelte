@@ -7,6 +7,10 @@
 
     export let editor;
     export let buttons = toolbar.mini;
+    let data = {};
+
+    buttons = Array.isArray(buttons) ? buttons : toolbar[buttons];
+    buttons = buttons ?? toolbar.mini;
     
     function process(actions, name, option) {
         if (option) {
@@ -19,8 +23,8 @@
             return actions[name];
         }
     }
-
 </script>
+
 <Toolbar {editor} let:active let:commands let:focus>
     {#if focus}
         <div class="s-editor-toolbar" transition:slide>

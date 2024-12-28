@@ -39,6 +39,7 @@
     export let id = `s-input-${uid(5)}`;
     export let style = null;
     export let textbox = null;
+    export let toolbar = 'mini';
 
     let dispatch = createEventDispatcher();
     let editor = new Editor({html: value});
@@ -165,7 +166,7 @@
         </div>
 
         {#if outlined}
-            <EditorToolbar {editor} />
+            <EditorToolbar {editor} buttons={toolbar} />
         {/if}
     </div>
     <div
@@ -191,5 +192,5 @@
     <slot slot="append-outer" name="append-outer" />
 </Input>
 {#if !outlined}
-    <EditorToolbar {editor} />
+    <EditorToolbar {editor} buttons={toolbar} />
 {/if}

@@ -43,7 +43,17 @@ export const formats = {
         active: active => active.list === 'check',
     },
     link: {
-        icon: mdiLink
+        icon: mdiLink,
+        command: (commands, editor) => {
+            if (editor.getActive()['link']) {
+                commands['link']();
+            } else {
+                const url = prompt('Please type URL', 'https://');
+                if(url) {
+                    commands['link'](url);
+                }
+            }
+        }
     },
     image: {
         icon: mdiImage
