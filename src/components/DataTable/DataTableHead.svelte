@@ -10,6 +10,7 @@
     import {stringify} from "../../internal/Class";
     import defaults from "./defaults.js";
     import {fade} from "svelte/transition";
+    import DataTableAction from "./DataTableAction.svelte";
 
     let dispatch = createEventDispatcher();
 
@@ -17,6 +18,7 @@
     export { klass as class };
 
     export let columns;
+    export let actions = false;
     export let loading = false;
 
 
@@ -82,6 +84,15 @@
 
         </DataTableCell>
     {/each}
+    {#if actions}
+        <DataTableCell
+            tag="th"
+            align="start"
+            noPadding
+            width="100px"
+            noWrap
+        />
+    {/if}
 </tr>
 {#if loading}
     <tr class="s-data-table-progress" in:fade={ {duration: 150, delay: 50} } out:fade={ {duration: 100} }>

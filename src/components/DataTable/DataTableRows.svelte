@@ -6,6 +6,7 @@
     export let hover = false;
     export let columns;
     export let rows;
+    export let actions = false;
     export let loading;
     export let texts = {
         loading: 'Loading...',
@@ -43,8 +44,10 @@
         <slot name="row" {row}>
             <DataTableRow
                     {columns}
+                    {actions}
                     {row}
                     on:rowClick
+                    on:action
                     {clickable}
                     {hover}
                     {texts}

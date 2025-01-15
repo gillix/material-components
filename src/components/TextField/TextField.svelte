@@ -142,7 +142,7 @@
       <!-- keypress Event is deprecated. Use keydown or keyup instead -->
       <input
         bind:this={inputElement}
-        bind:value
+        bind:value={input}
         {placeholder}
         {id}
         {readonly}

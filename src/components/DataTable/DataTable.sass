@@ -149,3 +149,16 @@
   align-content: end
   padding: 10px 20px
 
+.s-data-table-row-actions
+  display: flex
+
+.s-data-table-row-action
+  opacity: 0
+  transition: opacity .15s
+
+.s-data-table-row
+  &:hover .s-data-table-row-action
+    opacity: .6
+  .s-data-table-row-action:hover
+    opacity: 1
+

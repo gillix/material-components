@@ -17,6 +17,7 @@
     export let style = null;
     export let columns = [];
     export let rows = [];
+    export let actions = false;
     export let sorted = {};
     export let loading = false;
     export let highlightSorting = false;
@@ -63,21 +64,24 @@
       <slot name="table-headers" {columns}>
           <DataTableHead
               {columns}
+              {actions}
               {loading}
               on:sort
           />
       </slot>
   </thead>
   <tbody class="s-data-table__tbody">
-      <slot name="table-rows" {columns} {rows}>
+      <slot name="table-rows" {columns} {rows} {actions}>
           <DataTableRows
               {columns}
               {rows}
+              {actions}
               {loading}
               {texts}
               {hover}
               {clickable}
               on:rowClick
+              on:action
           />
       </slot>
   </tbody>
